@@ -1,0 +1,146 @@
+
+
+/* Portada */
+.portada {
+    background: #B0B0B0;
+    height: 160px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Contenido del perfil */
+.perfil-content {
+    padding: 1.5rem;
+    text-align: center;
+    background: white;
+}
+
+.perfil-content img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin: -50px auto 1rem auto;
+    border: 4px solid white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    display: block;
+    position: absolute;
+    z-index: 1000;
+}
+
+.perfil-content h2 {
+    margin: 0.5rem 0;
+    margin-top: 3rem;
+    font-size: 1.3rem;
+    color: #333;
+}
+
+.perfil-content p {
+    color: #666;
+    margin: 0.3rem 0;
+    font-size: 0.9rem;
+}
+
+/* Información adicional */
+.info-adicional {
+    margin: 1.5rem 0;
+    text-align: left;
+}
+
+.info-card {
+    background: #f8fafc;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+
+.info-linea {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.etiqueta {
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.valor {
+    color: #333;
+    font-weight: 500;
+}
+
+/* Botones */
+.btn-agregar {
+    background: #3A86FF;
+    color: white;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+    transition: background 0.3s;
+}
+
+.btn-agregar:hover {
+    background: #6b7280;
+}
+
+.btn-logout {
+    display: inline-block;
+    padding: 10px 20px;
+    background: #dc2626;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 0.9rem;
+    margin-top: 1rem;
+    width: 100%;
+}
+
+.btn-logout:hover {
+    background: #b91c1c;
+}
+
+/* Sección participantes */
+.seccion-titulo {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: #333;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.btn-mas {
+    background: #10b981;
+    color: white;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    font-size: 1.2rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 10px;
+}
+
+/* Línea divisoria */
+.divisor {
+    height: 1px;
+    background: #e5e5e5;
+    margin: 1.5rem 0;
+}

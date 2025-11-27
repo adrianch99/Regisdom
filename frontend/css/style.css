@@ -1,0 +1,396 @@
+/* ==== Reset ==== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  display: flex;
+  background-color: whitesmoke;
+  color: #B0B0B0;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ==== Sidebar ==== */
+.sidebar {
+  width: 240px;
+  background: white;
+  border-right: 1px solid #ddd;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+}
+
+.sidebar .logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 28px;
+  color: #3A86FF;
+  text-align: center;
+}
+
+.sidebar .menu a {
+  display: block;
+  color: #B0B0B0;
+  text-decoration: none;
+  padding: 12px 15px;
+  width: 100%;
+  margin-bottom: 10px;
+  font-size: 1rem;
+}
+
+.sidebar .menu-confi {
+  display: block;
+  position: fixed;
+  bottom: 0;
+}
+
+.sidebar .menu-confi a {
+  display: block;
+  color: #B0B0B0;
+  text-decoration: none;
+  padding: 12px 15px;
+  width: 100%;
+  margin-bottom: 10px;
+  font-size: 1rem;
+}
+
+.sidebar .menu-confi button {
+  display: block;
+  color: #B0B0B0;
+  border: none;
+  background-color: white;
+  padding: 12px 15px;
+  width: 100%;
+  margin-bottom: 10px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+
+.sidebar .menu a i,
+.sidebar .menu-confi a i,
+.sidebar .menu-confi button i {
+  margin-right: 10px;
+  font-size: 1.7rem;
+  vertical-align: middle;
+}
+
+.sidebar .menu a:hover,
+.sidebar .menu-confi a:hover,
+.sidebar .menu-confi button:hover
+.sidebar .menu a:focus,
+.sidebar .menu-confi a:focus,
+.sidebar .menu-confi button:focus {
+  background: #B0B0B0;
+  color: #FFFFFF;
+}
+
+.sidebar .menu a.active,
+.sidebar .menu-confi a.active {
+  background: #3A86FF;
+  color: #FFFFFF;
+}
+
+/* ==== Main content ==== */
+.content {
+  margin-left: 240px;
+  flex: 1;
+  padding: 20px;
+}
+
+/* ==== Topbar ==== */
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: white;
+  padding: 20px;
+  margin: -20px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.topbar h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-top: 7px;
+  color: #12121294;
+}
+
+.cartulinas h2,
+.cliente h2,
+.clientes h2,
+#clientes h2,
+#prestamos h2,
+#cartulinas h2,
+.cobradores h2,
+#cobradores h2,
+.negociosAdmin h2,
+.prestamos h2,
+.usuarios h2 {
+  margin-bottom: 12px;
+  margin-left: 12px;
+  color: #12121294;
+}
+
+.negocio-nombre h2 {
+  margin-left: 4px;
+  color: #12121294;
+  margin-bottom: -16px;
+}
+/* ==== Estadísticas ==== */
+.estadisticas h2 {
+  font-size: 1.4rem;
+  color: #12121294;
+  margin-bottom: 20px;
+  margin-left: 4px;
+  transition: 0.9;
+  opacity: 0;
+  animation: fadeIn 1s ease forwards;
+  animation-delay: 0.4s;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 20px;
+}
+
+.stat-box {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeUp 0.8s ease forwards;
+}
+
+.stat-box:nth-child(1) {
+  animation-delay: 0.8s;
+}
+
+.stat-box:nth-child(2) {
+  animation-delay: 1.2s;
+}
+
+.stat-box:nth-child(3) {
+  animation-delay: 1.6s;
+}
+
+.stat-box h3 {
+  font-size: 2rem;
+  color: #3A86FF;
+  margin-bottom: 8px;
+}
+
+.stat-box p {
+  font-size: 0.9rem;
+  color: #B0B0B0;
+}
+
+/*--- cards de listas ---*/
+.negocio,
+.usuario,
+.card-clientes,
+.card-prestamos,
+#lista-prestamos-cliente {
+  background: white;
+  padding: 15px;
+  margin: 8px 10px;
+  border-radius: 8px;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: 0.6s;
+}
+
+.negocio:hover,
+.usuario:hover,
+.card-clientes:hover,
+.card-prestamos:hover,
+#lista-prestamos-cliente:hover {
+  background: #B0B0B0;
+  color: white;
+}
+
+.solicitar-prestamo,
+.btn-aceptar-prestamo,
+.btn-rechazar-prestamo,
+.btn-eliminar,
+.btn-editar,
+.btn-rol {
+  padding: 8px 14px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  background: #6b7280;
+  color: white;
+  transition: 0.3s;
+}
+
+.btn-guardar,
+.btn-env-solicitud,
+.btn-listo {
+  padding: 8px 14px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  background: #3A86FF;
+  color: white;
+  width: 50%;
+  transition: 0.3s;
+}
+
+.btn-env-solicitud:hover,
+.btn-guardar:hover,
+.btn-cancelar:hover,
+.btn-listo:hover,
+.btn-auth:hover {
+  background: #121212b9;
+}
+
+.solicitar-prestamo:hover,
+.btn-aceptar-prestamo:hover,
+.btn-rechazar-prestamo:hover,
+.btn-eliminar:hover,
+.btn-editar:hover,
+.btn-rol:hover {
+  background: #3A86FF;
+}
+
+/* ---- Modal general ---- */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 400px;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.btn-cancelar {
+  background: #9ca3af;
+  padding: 8px 14px;
+  border: none;
+  border-radius: 6px;
+  width: 50%;
+  cursor: pointer;
+  color: #fff;
+}
+
+.modal-content h2 {
+  margin-bottom: 15px;
+  color: #3A86FF;
+}
+
+.modal-content input {
+  width: 100%;
+  padding: 8px;
+  margin: 8px 0;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+}
+
+/* ---- vista cobrador ---- */
+section {
+  margin-bottom: 30px;
+}
+
+/* ---- container de botones ---- */
+.modal-actions,
+.btn-prestamos-actions,
+.btn-usuarios-actions,
+.btn-clientes-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+
+.btn-guardar-cambios {
+    background-color: #6b7280;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 10px 20px;
+    cursor: pointer;
+    margin-top: 10px;
+    margin-bottom: 15px;
+}
+
+.btn-guardar-cambios:hover {
+    background-color: #3A86FF;
+}
+
+/* ---- Animationes ---- */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+
+@keyframes slideDown {
+  from {
+    transform: translateY(-50px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

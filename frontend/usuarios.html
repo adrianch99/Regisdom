@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Usuarios</title>
+    <link rel="stylesheet" href="/frontend/css/style.css">
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="logo">
+            <h2>Regisdom</h2>
+        </div>
+        <nav class="menu">
+           <a href="adminGeneral.html"><i class="bx bx-home"></i> Inicio</a>
+            <a href="negociosAdmin.html"><i class="bx bx-store"></i> Negocios</a>
+            <a href="usuarios.html"><i class="bx bx-user"></i> Usuarios</a>
+        </nav>
+
+        <nav class="menu-confi">
+            <a href="perfil.html"><i class="bx bx-user"></i> Perfil</a>
+            <a href="ajustes.html"><i class="bx bx-cog"></i> Ajustes</a>
+            <button onclick="logout()"><i class="bx bx-log-out"></i> Cerrar sesión</button>
+        </nav>
+    </aside>
+
+    <!-- Main content -->
+    <main class="content">
+        <header class="topbar">
+            <h1>Gestion de usuarios</h1>
+        </header>
+        
+        <section class="usuarios">
+        <h2>Lista de Usuarios</h2>
+        <div id="usuarios-lista" class="usuarios-lista">
+
+        </div>
+        </section>
+    </main>
+
+    <script src="/frontend/js/adminGeneral.js"></script>
+</body>
+
+</html>

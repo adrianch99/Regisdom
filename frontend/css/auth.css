@@ -1,0 +1,122 @@
+/* === Layout principal === */
+.auth-layout {
+  display: flex;
+  grid-template-columns: 1fr;
+  min-height: 100vh;
+}
+
+/* Lado izquierdo */
+.auth-left {
+  background: #3A86FF;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 3rem 4rem;
+}
+
+.auth-left .brand {
+  font-size: 2.5rem;
+  margin-top: 10rem;
+  margin-bottom: 1rem;
+}
+
+.auth-left .brand-text {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  opacity: 0.9;
+}
+
+/* Lado derecho */
+.auth-right {
+  background: whitesmoke;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
+
+.auth-box {
+  background: white;
+  padding: 2.5rem;
+  border-radius: 16px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  margin-left: 3.7rem;
+}
+
+.auth-box h2 {
+  margin-left: -14px;
+  margin-bottom: 1rem;
+  color: #3A86FF;
+}
+
+.auth-box p {
+  margin-bottom: 1.2rem;
+  color: #555;
+}
+
+/* Inputs */
+.login-form input,
+.register-form input {
+  width: 100%;
+  padding: 12px;
+  margin: 8px 0;
+  border-radius: 7px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+}
+
+/* Botones */
+.btn {
+  width: 100%;
+  padding: 1rem;
+  margin-top: 1rem;
+  background: #3A86FF;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.btn:hover {
+  background: #6b7280;
+}
+
+.facebook-btn {
+  background-color: #145dbf;
+  color: white;
+  width: 100%;
+  padding: 1rem;
+  margin-bottom: 2rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.facebook-btn:hover {
+  background-color: #6b7280;
+}
+
+
+/* Enlaces */
+.auth-box a {
+  color: #121212d0;
+  text-decoration: none;
+  margin-top: 6rem;
+}
+
+.auth-box a:hover {
+  color: #3A86FF;
+}
+
+footer {
+  color: white;
+  margin-top: 250px;
+  margin-left: 6rem;
+}

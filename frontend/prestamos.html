@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prestamos</title>
+    <link rel="stylesheet" href="/frontend/css/style.css">
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+</head>
+
+<body>
+     <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="logo">
+            <h2>Regisdom</h2>
+        </div>
+        <nav class="menu">
+            <a href="index.html"><i class="bx bx-home"></i> Inicio</a>
+            <a href="prestamos.html"><i class="bx bx-wallet"></i> Prestamos</a>
+            <a href="cartulinas.html"><i class="bx bx-book"></i> Cartulinas</a>
+            <a href="clientes.html"><i class="bx bx-user"></i> Clientes</a>
+            <a href="cobradores.html"><i class="bx bx-id-card"></i> Cobradores</a>
+        </nav>
+
+        <nav class="menu-confi">
+            <a href="perfil.html"><i class="bx bx-user"></i> Perfil</a>
+            <a href="ajustes.html"><i class="bx bx-cog"></i> Ajustes</a>
+            <button onclick="logout()"><i class="bx bx-log-out"></i> Cerrar sesión</button>
+        </nav>
+    </aside>
+
+    <!-- Main content -->
+    <main class="content">
+        <header class="topbar">
+            <h1>Gestion de prestamos</h1>
+        </header>
+
+        <section class="prestamos">
+            <h2>Lista de prestamos</h2>
+            <div id="lista-prestamos"></div>
+        </section>
+    </main>
+
+</body>
+
+</html>

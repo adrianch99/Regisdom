@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil</title>
+    <link rel="stylesheet" href="/frontend/css/style.css">
+    <link rel="stylesheet" href="/frontend/css/perfil.css">
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="logo">
+            <h2>Regisdom</h2>
+        </div>
+        <nav class="menu">
+           <a href="cobrador.html"><i class="bx bx-home"></i> Inicio</a>
+            <a href="prestamos.html"><i class="bx bx-wallet"></i> Prestamos</a>
+            <a href="cartulinas.html"><i class="bx bx-book"></i> Cartulinas</a>
+            <a href="clientes.html"><i class="bx bx-user"></i> Clientes</a>
+        </nav>
+
+        <nav class="menu-confi">
+            <a href="perfilCobrador.html"><i class="bx bx-user"></i> Perfil</a>
+            <a href="ajustesCobrador.html"><i class="bx bx-cog"></i> Ajustes</a>
+            <button onclick="logout()"><i class="bx bx-log-out"></i> Cerrar sesión</button>
+        </nav>
+    </aside>
+
+    <!-- Main content -->
+    <main class="content">
+        <header class="topbar">
+            <h1>Dashboard</h1>
+        </header>
+
+        <div class="container">
+            <!-- Portada azul -->
+            <div class="portada">
+            </div>
+
+            <!-- Contenido del perfil -->
+            <div class="perfil-content">
+                <img id="foto-perfil" src="/frontend/img/default-avatar.png" alt="Foto de perfil">
+                <h2 id="nombre"></h2>
+                <p id="email"></p>
+                <p><strong>Rol:</strong> <span id="rol"></span></p>
+
+                <!-- Botón agregar (puedes personalizar su función) -->
+                <button class="btn-agregar">Editar Informacion</button>
+
+                <!-- Línea divisoria -->
+                <div class="divisor"></div>
+
+                <!-- Sección de información adicional -->
+                <div class="seccion-titulo">
+                    Información Adicional
+                    <button class="btn-mas">+</button>
+                </div>
+
+                <div class="info-adicional">
+                    <div class="info-card">
+                        <div class="info-linea">
+                            <span class="etiqueta">Última conexión:</span>
+                            <span class="valor" id="ultima-conexion">Hoy</span>
+                        </div>
+                        <div class="info-linea">
+                            <span class="etiqueta">Miembro desde:</span>
+                            <span class="valor" id="miembro-desde">Ene 2024</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="/frontend/js/perfil.js"></script>
+</body>
+
+</html>
