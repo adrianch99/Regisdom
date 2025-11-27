@@ -20,16 +20,15 @@ app.use(bodyParser.json());
  //Configuración para servir archivos estáticos
 app.use(express.static(path.join(__dirname, '../frontend')));
 
-/*
 // Ruta para manejar cualquier archivo HTML directamente
 app.get('/*', (req, res) => {
-    if (req.path.endsWith('.html')) {
-        const filePath = path.join(__dirname, '../frontend', req.path);
-        res.sendFile(filePath);
-    } else {
-        res.status(404).send('Archivo no encontrado');
-    }
-});*/
+    const filePath = path.join(__dirname, '../frontend', req.path);
+    res.sendFile(filePath, (err) => {
+        if (err) {
+            res.status(404).send('Archivo no encontrado');
+        }
+    });
+});
 
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);

@@ -2,44 +2,32 @@
 // Solo agregar event listener si el formulario de login existe
 if (document.getElementById('login-form')) {
     document.getElementById('login-form').addEventListener('submit', async function (e) {
-        e.preventDefault();
+        e.preventDefault(); // Evitar el comportamiento predeterminado del formulario
+
         const email = document.getElementById('email').value;
         const password = document.getElementById('password').value;
         const message = document.getElementById('login-message');
 
         try {
-            const res = await fetch('http://localhost:3001/api/auth/login', {
+            const response = await fetch('http://localhost:3001/api/auth/login', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email, password })
             });
 
-            const data = await res.json();
+            const data = await response.json();
 
-            if (res.ok) {
-                localStorage.setItem("user", JSON.stringify(data.user));
-                message.textContent = data.message;
-                message.style.color = 'green';
-
-                setTimeout(() => {
-                    if (data.user && data.user.role === 'admin_general') {
-                        window.location.href = 'adminGeneral.html';
-                    } else if (data.user && data.user.role === 'admin') {
-                        window.location.href = 'index.html';
-                    } else if (data.user && data.user.role === 'cliente') {
-                        window.location.href = 'cliente.html';
-                    } else if (data.user && data.user.role === 'cobrador') {
-                        window.location.href = 'cobrador.html';
-                    } else {
-                        window.location.href = 'cliente.html';
-                    }
-                }, 500);
+            if (response.ok) {
+                // Guardar el token o redirigir al usuario
+                localStorage.setItem('user', JSON.stringify(data.user));
+                window.location.href = 'adminGeneral.html'; // Redirigir al dashboard
             } else {
-                message.textContent = data.message;
+                message.textContent = data.message || 'Error al iniciar sesión.';
                 message.style.color = 'red';
             }
         } catch (err) {
-            message.textContent = 'Error de conexión.';
+            console.error('Error al iniciar sesión:', err);
+            message.textContent = 'Error al conectar con el servidor.';
             message.style.color = 'red';
         }
     });
