@@ -21,7 +21,7 @@ app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, '../frontend')));
 
 // Ruta para manejar cualquier archivo HTML directamente
-app.get('/*', (req, res) => {
+app.get('*', (req, res) => {
     const filePath = path.join(__dirname, '../frontend', req.path);
     res.sendFile(filePath, (err) => {
         if (err) {
