@@ -18,9 +18,30 @@ if (document.getElementById('login-form')) {
             const data = await response.json();
 
             if (response.ok) {
-                // Guardar el token o redirigir al usuario
+                // Guardar el usuario en localStorage
                 localStorage.setItem('user', JSON.stringify(data.user));
-                window.location.href = 'adminGeneral.html'; // Redirigir al dashboard
+
+                // Redirigir según el rol del usuario
+                switch (data.user.role) {
+                    case 'admin_general':
+                        window.location.href = 'adminGeneral.html';
+                        break;
+                    case 'admin':
+                        window.location.href = 'admin.html';
+                        break;
+                    case 'cliente':
+                        window.location.href = 'cliente.html';
+                        break;
+                    case 'cobrador':
+                        window.location.href = 'cobrador.html';
+                        break;
+                    case 'usuario':
+                        window.location.href = 'cliente.html';
+                        break;
+                    default:
+                        message.textContent = 'Rol no reconocido.';
+                        message.style.color = 'red';
+                }
             } else {
                 message.textContent = data.message || 'Error al iniciar sesión.';
                 message.style.color = 'red';
