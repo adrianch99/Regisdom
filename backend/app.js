@@ -25,7 +25,7 @@ app.get('*', (req, res) => {
     const filePath = path.join(__dirname, '../frontend', req.path);
     res.sendFile(filePath, (err) => {
         if (err) {
-            res.status(404).send('Archivo no encontrado');
+            res.sendFile(path.join(__dirname, '../frontend/index.html')); // Redirige al archivo index.html si no se encuentra el archivo
         }
     });
 });
