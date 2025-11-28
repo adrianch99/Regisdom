@@ -17,19 +17,10 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
- //Configuración para servir archivos estáticos
+// Configuración para servir archivos estáticos
 app.use(express.static(path.join(__dirname, '../frontend')));
 
-// Ruta para manejar cualquier archivo HTML directamente
-app.get('/*', (req, res) => {
-    const filePath = path.join(__dirname, '../frontend', req.path);
-    res.sendFile(filePath, (err) => {
-        if (err) {
-            res.sendFile(path.join(__dirname, '../frontend/index.html')); // Redirige al archivo index.html si no se encuentra el archivo
-        }
-    });
-});
-
+// Rutas de la API
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/businesses', businessRoutes);
@@ -38,6 +29,11 @@ app.use('/api/cartulinas', cartulinaRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/clients', clientsRoutes);
 app.use('/api/cobradores', cobradoresRoutes);
+
+// Fallback para servir index.html en rutas no encontradas
+app.use((req, res) => {
+    res.sendFile(path.join(__dirname, '../frontend/index.html'));
+});
 
 const PORT = process.env.PORT;
 app.listen(PORT, () => {
