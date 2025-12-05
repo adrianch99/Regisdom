@@ -19,6 +19,18 @@ services:
         sync: false
       - key: JWT_SECRET
         sync: false
+      - key: PGUSER
+        value: neondb_owner
+      - key: PGPASSWORD
+        value: npg_GBk8EJM7TdfO
+      - key: PGHOST
+        value: ep-royal-sun-a4kntl0s-pooler.us-east-1.aws.neon.tech
+      - key: PGDATABASE
+        value: neondb
+      - key: PGPORT
+        value: 5432
+      - key: PGSSLMODE
+        value: require
   - type: static
     name: pagadiarios-frontend
     staticPublishPath: frontend
