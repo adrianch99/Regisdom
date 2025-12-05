@@ -8,9 +8,9 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 });
 
-const API_CLIENTES = "http://localhost:3001/api/clients";
-const API_LOANS = "http://localhost:3001/api/loans";
-const API_CARTULINAS = "http://localhost:3001/api/cartulinas";
+const API_CLIENTES = "/api/clients";
+const API_LOANS = "/api/loans";
+const API_CARTULINAS = "/api/cartulinas";
 const user = JSON.parse(localStorage.getItem("user")); // cobrador logueado
 
 // Cargar clientes
@@ -266,7 +266,7 @@ function generarCartulina(prestamo) {
     contenedorCartulinas.appendChild(divCartulina);
 
     // Guardar cartulina en la base de datos
-    fetch("http://localhost:3001/api/cartulinas", {
+    fetch("/api/cartulinas", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ prestamo_id: id, cliente, direccion, telefono, cobrador_id })

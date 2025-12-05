@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 });
 
-const API_URL = "http://localhost:3001/api/clients";
+const API_URL = "/api/clients";
 
 // Cargar lista de clientes
 async function cargarClientes() {

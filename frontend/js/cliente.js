@@ -22,7 +22,7 @@ if (token) {
     window.history.replaceState({}, document.title, window.location.pathname);
 
     // Obtener datos del usuario
-    fetch("http://localhost:3001/api/auth/me", {
+    fetch("/api/auth/me", {
         headers: { "Authorization": "Bearer " + token }
     })
         .then(res => {
@@ -45,8 +45,8 @@ if (token) {
 }
 
 
-const API_BUSINESSES = "http://localhost:3001/api/businesses";
-const API_PRESTAMOS = "http://localhost:3001/api/loans";
+const API_BUSINESSES = "/api/businesses";
+const API_PRESTAMOS = "/api/loans";
 
 // Cargar negocios
 async function cargarNegocios() {

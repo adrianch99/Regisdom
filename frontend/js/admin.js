@@ -1,9 +1,14 @@
-const API_URL = "http://localhost:3001/api/clients";
-const API_BUSINESS_DASHBOARD = "http://localhost:3001/api/businesses/dashboard";
-const API_CLIENTES = "http://localhost:3001/api/clients";
-const API_LOANS = "http://localhost:3001/api/loans";
-const API_CARTULINAS = "http://localhost:3001/api/cartulinas";
-const API_COBRADORES = "http://localhost:3001/api/cobradores";
+// Define la URL base dependiendo del entorno
+const BASE_URL = window.location.hostname === 'localhost' 
+    ? 'http://localhost:3001' // Desarrollo
+    : 'https://regisdom.onrender.com'; // Producción
+
+const API_URL = `${BASE_URL}/api/clients`;
+const API_BUSINESS_DASHBOARD = `${BASE_URL}/api/businesses/dashboard`;
+const API_CLIENTES = `${BASE_URL}/api/clients`;
+const API_LOANS = `${BASE_URL}/api/loans`;
+const API_CARTULINAS = `${BASE_URL}/api/cartulinas`;
+const API_COBRADORES = `${BASE_URL}/api/cobradores`;
 
 let user = null;
 
@@ -563,7 +568,7 @@ function generarCartulina(prestamo) {
     contenedorCartulinas.appendChild(divCartulina);
 
     // Guardar cartulina en la base de datos
-    fetch("http://localhost:3001/api/cartulinas", {
+    fetch("/api/cartulinas", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ prestamo_id: id, cliente, direccion, telefono, cobrador_id })
@@ -783,17 +788,17 @@ async function testAPI() {
         console.log("Probando conexión con la API...");
 
         // Probar endpoint básico
-        const testRes = await fetch('http://localhost:3001/api/test');
+        const testRes = await fetch('/api/test');
         const testData = await testRes.json();
         console.log("Test API:", testData);
 
         // Probar businesses
-        const businessRes = await fetch('http://localhost:3001/api/businesses');
+        const businessRes = await fetch('/api/businesses');
         const businessData = await businessRes.json();
         console.log("Businesses:", businessData);
 
         // Probar clients
-        const clientsRes = await fetch('http://localhost:3001/api/clients');
+        const clientsRes = await fetch('/api/clients');
         const clientsData = await clientsRes.json();
         console.log("Clients:", clientsData);
 

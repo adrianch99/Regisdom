@@ -9,7 +9,7 @@ if (document.getElementById('login-form')) {
         const message = document.getElementById('login-message');
 
         try {
-            const response = await fetch('http://localhost:3001/api/auth/login', {
+            const response = await fetch('/api/auth/login', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email, password })
@@ -78,7 +78,7 @@ if (document.getElementById('register-form')) {
         }
 
         try {
-            const res = await fetch('http://localhost:3001/api/auth/register', {
+            const res = await fetch('/api/auth/register', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ nombre: name, email, password })
@@ -107,7 +107,7 @@ if (document.getElementById('register-form')) {
 // Función para solicitar recuperación
 async function forgotPassword(email) {
     try {
-        const res = await fetch('http://localhost:3001/api/auth/forgot-password', {
+        const res = await fetch('/api/auth/forgot-password', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ email })
@@ -123,7 +123,7 @@ async function forgotPassword(email) {
 // Función para restablecer contraseña
 async function resetPassword(token, newPassword) {
     try {
-        const res = await fetch('http://localhost:3001/api/auth/reset-password', {
+        const res = await fetch('/api/auth/reset-password', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ token, newPassword })

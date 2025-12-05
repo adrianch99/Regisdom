@@ -8,8 +8,8 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 });
 
-const API_BUSINESSES = "http://localhost:3001/api/businesses";
-const API_URL = "http://localhost:3001/api/users";
+const API_BUSINESSES = "/api/businesses";
+const API_URL = "/api/users";
 
 // Cargar negocios
 async function cargarNegocios() {
