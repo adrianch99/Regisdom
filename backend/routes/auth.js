@@ -31,23 +31,24 @@ router.post('/register', async (req, res) => {
     }
 
     try {
-        // Verificar si el usuario existe
-        const exists = await pool.query('SELECT * FROM users WHERE email = $1', [email]);
+        // Verificar si el usuario ya existe
+        const exists = await pool.query('SELECT id FROM users WHERE email = $1', [email]);
         if (exists.rows.length > 0) {
             return res.status(409).json({ message: 'El usuario ya existe.' });
         }
 
-        // Encriptar contraseña
+        // Encriptar la contraseña
         const hashedPassword = await bcrypt.hash(password, saltRounds);
 
-        // Insertar usuario con contraseña encriptada
-        await pool.query(
-            'INSERT INTO users (nombre, email, password, role) VALUES ($1, $2, $3, $4)',
+        // Insertar el nuevo usuario
+        const result = await pool.query(
+            'INSERT INTO users (nombre, email, password, role) VALUES ($1, $2, $3, $4) RETURNING id',
             [nombre, email, hashedPassword, 'usuario']
         );
 
-        res.status(201).json({ message: 'Usuario registrado correctamente.' });
+        res.status(201).json({ message: 'Usuario registrado correctamente.', userId: result.rows[0].id });
     } catch (err) {
+        console.error('Error en el servidor al registrar usuario:', err);
         res.status(500).json({ message: 'Error en el servidor.', error: err.message });
     }
 });

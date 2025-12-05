@@ -78,7 +78,7 @@ if (document.getElementById('register-form')) {
         }
 
         try {
-            const res = await fetch('/api/auth/register', {
+            const res = await fetch(`${BASE_URL}/api/auth/register`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ nombre: name, email, password })
@@ -93,11 +93,12 @@ if (document.getElementById('register-form')) {
                     window.location.href = "index1.html";
                 }, 500);
             } else {
-                message.textContent = data.message;
+                message.textContent = data.message || 'Error al registrar usuario.';
                 message.style.color = 'red';
             }
         } catch (err) {
-            message.textContent = 'Error de conexión.';
+            console.error('Error al registrar usuario:', err);
+            message.textContent = 'Error al conectar con el servidor.';
             message.style.color = 'red';
         }
     });
