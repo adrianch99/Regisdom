@@ -55,19 +55,24 @@ function mostrarDatosEnTabs(data) {
 
 // Actualizar estadísticas
 async function actualizarEstadisticas(data) {
-    const { clientes, prestamos } = data;
-
-    // Depuración: Verificar los datos de préstamos
-    console.log("Préstamos recibidos:", prestamos);
-
-    // Contar préstamos activos (estado 'activo')
-    const prestamosActivos = prestamos.filter(p => p.estado === 'activo').length;
-
-    // Depuración: Verificar el conteo de préstamos activos
-    console.log("Préstamos activos contados:", prestamosActivos);
+    const { clientes } = data;
 
     // Contar clientes registrados
     const totalClientes = clientes.length;
+
+    // Obtener número de préstamos activos directamente desde la base de datos
+    let prestamosActivos = 0;
+    try {
+        const res = await fetch(`${API_LOANS}/count?estado=aceptado`);
+        if (res.ok) {
+            const { count } = await res.json();
+            prestamosActivos = count;
+        } else {
+            console.error("Error al contar préstamos activos:", await res.text());
+        }
+    } catch (err) {
+        console.error("Error al conectar con el servidor para contar préstamos activos:", err);
+    }
 
     // Obtener número de cobradores (necesitarías una API para esto)
     try {

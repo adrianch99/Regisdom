@@ -116,16 +116,24 @@ router.put('/rechazar/:id', async (req, res) => {
     }
 });
 
-// Rechazar préstamo
-router.put('/rechazar/:id', async (req, res) => {
+// Contar préstamos por estado
+router.get('/count', async (req, res) => {
+    const { estado } = req.query;
+
+    if (!estado) {
+        return res.status(400).json({ message: 'El parámetro "estado" es obligatorio.' });
+    }
+
     try {
-        await pool.query(
-            'UPDATE loans SET estado = $1 WHERE id = $2',
-            ['rechazado', req.params.id]
+        const result = await pool.query(
+            'SELECT COUNT(*) FROM loans WHERE estado = $1',
+            [estado]
         );
-        res.json({ message: "Préstamo rechazado" });
+        const count = parseInt(result.rows[0].count, 10);
+        res.json({ count });
     } catch (err) {
-        res.status(500).json({ message: "Error en el servidor." });
+        console.error('Error al contar préstamos:', err);
+        res.status(500).json({ message: 'Error al contar préstamos.', error: err.message });
     }
 });
 
