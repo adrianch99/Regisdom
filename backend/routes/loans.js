@@ -116,9 +116,6 @@ router.put('/rechazar/:id', async (req, res) => {
     }
 });
 
-module.exports = router;
-});
-
 // Rechazar préstamo
 router.put('/rechazar/:id', async (req, res) => {
     try {
