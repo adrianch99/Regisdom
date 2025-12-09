@@ -57,8 +57,8 @@ function mostrarDatosEnTabs(data) {
 async function actualizarEstadisticas(data) {
     const { clientes, prestamos } = data;
 
-    // Contar préstamos activos (estado 'activo' o 'pendiente')
-    const prestamosActivos = prestamos.filter(p => p.estado === 'activo' || p.estado === 'pendiente').length;
+    // Contar préstamos activos (estado 'activo')
+    const prestamosActivos = prestamos.filter(p => p.estado === 'activo').length;
 
     // Contar clientes registrados
     const totalClientes = clientes.length;
