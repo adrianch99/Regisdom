@@ -92,7 +92,7 @@ document.getElementById("form-prestamo").addEventListener("submit", async e => {
     console.log("Datos enviados:", { negocio_id: negocioId, monto, cliente_id: window.user.id });
 
     try {
-        const res = await fetch(API_PRESTAMOS, {
+        const res = await fetch(`${BASE_URL}/api/loans`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
@@ -113,6 +113,7 @@ document.getElementById("form-prestamo").addEventListener("submit", async e => {
         }
     } catch (err) {
         console.error("Error:", err);
+        alert("Error al conectar con el servidor.");
     }
 });
 

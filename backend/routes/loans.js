@@ -18,38 +18,22 @@ router.get('/', async (req, res) => {
 
 // Crear préstamo
 router.post('/', async (req, res) => {
-    const { monto, cliente_id, cobrador_id, negocio_id, fecha, estado } = req.body;
+    const { cliente_id, monto, negocio_id } = req.body;
 
-    console.log("Datos recibidos en el backend:", req.body);
+    if (!cliente_id || !monto || !negocio_id) {
+        return res.status(400).json({ message: 'Todos los campos son obligatorios.' });
+    }
 
     try {
-        // Verificar si el cliente existe en la tabla users
-        const cliente = await pool.query('SELECT id FROM users WHERE id = $1', [cliente_id]);
-        if (cliente.rows.length === 0) {
-            return res.status(400).json({ message: 'El cliente no existe.' });
-        }
-
-        // Verificar si el negocio existe en la tabla businesses
-        const negocio = await pool.query('SELECT id FROM businesses WHERE id = $1', [negocio_id]);
-        if (negocio.rows.length === 0) {
-            return res.status(400).json({ message: 'El negocio no existe.' });
-        }
-
-        // Crear el préstamo con el negocio_id
-        await pool.query(
-            'INSERT INTO loans (monto, cliente_id, cobrador_id, negocio_id, fecha, estado) VALUES ($1, $2, $3, $4, $5, $6)',
-            [
-                monto,
-                cliente_id,
-                cobrador_id || null,
-                negocio_id,
-                fecha || new Date(),
-                estado || 'pendiente',
-            ]
+        const result = await pool.query(
+            'INSERT INTO loans (cliente_id, monto, negocio_id, estado) VALUES ($1, $2, $3, $4) RETURNING *',
+            [cliente_id, monto, negocio_id, 'pendiente']
         );
-        res.status(201).json({ message: 'Préstamo creado.' });
+
+        res.status(201).json({ message: 'Préstamo creado con éxito.', loan: result.rows[0] });
     } catch (err) {
-        res.status(500).json({ message: 'Error en el servidor.' });
+        console.error('Error al crear préstamo:', err); // Log detallado
+        res.status(500).json({ message: 'Error en el servidor.', error: err.message });
     }
 });
 
@@ -117,6 +101,22 @@ router.put('/aceptar/:id', async (req, res) => {
         console.error("Error aceptando préstamo:", err);
         res.status(500).json({ message: "Error en el servidor." });
     }
+});
+
+// Rechazar préstamo
+router.put('/rechazar/:id', async (req, res) => {
+    try {
+        await pool.query(
+            'UPDATE loans SET estado = $1 WHERE id = $2',
+            ['rechazado', req.params.id]
+        );
+        res.json({ message: "Préstamo rechazado" });
+    } catch (err) {
+        res.status(500).json({ message: "Error en el servidor." });
+    }
+});
+
+module.exports = router;
 });
 
 // Rechazar préstamo
