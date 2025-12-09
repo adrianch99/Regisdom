@@ -1,3 +1,13 @@
+// Define la URL base dependiendo del entorno
+const BASE_URL = window.location.hostname === 'localhost' 
+    ? 'http://localhost:3001' // Desarrollo
+    : 'https://regisdom.onrender.com'; // Producción
+
+const API_CLIENTES = `${BASE_URL}/api/clients`;
+const API_LOANS = `${BASE_URL}/api/loans`;
+const API_CARTULINAS = `${BASE_URL}/api/cartulinas`;
+const user = JSON.parse(localStorage.getItem("user")); // cobrador logueado
+
 document.addEventListener("DOMContentLoaded", () => {
     const user = JSON.parse(localStorage.getItem("user"));
 
@@ -7,11 +17,6 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
     }
 });
-
-const API_CLIENTES = "/api/clients";
-const API_LOANS = "/api/loans";
-const API_CARTULINAS = "/api/cartulinas";
-const user = JSON.parse(localStorage.getItem("user")); // cobrador logueado
 
 // Cargar clientes
 async function cargarClientes() {
@@ -378,22 +383,6 @@ document.querySelectorAll(".tab-btn").forEach(btn => {
         document.getElementById(btn.dataset.tab).classList.add("active");
     });
 });
-
-// Inicializar
-cargarClientes();
-cargarPrestamos();
-cargarCartulinas();
-
-btn.addEventListener("click", () => {
-    // quitar active de todos
-    document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
-    document.querySelectorAll(".tab-content").forEach(tc => tc.classList.remove("active"));
-
-    // activar el actual
-    btn.classList.add("active");
-    document.getElementById(btn.dataset.tab).classList.add("active");
-});
-
 
 // Inicializar
 cargarClientes();

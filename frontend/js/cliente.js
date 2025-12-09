@@ -1,3 +1,8 @@
+// Define la URL base dependiendo del entorno
+const BASE_URL = window.location.hostname === 'localhost' 
+    ? 'http://localhost:3001' // Desarrollo
+    : 'https://regisdom.onrender.com'; // Producción
+
 document.addEventListener("DOMContentLoaded", () => {
     const user = JSON.parse(localStorage.getItem("user"));
 

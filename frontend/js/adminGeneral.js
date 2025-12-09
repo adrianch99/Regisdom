@@ -1,3 +1,11 @@
+// Define la URL base dependiendo del entorno
+const BASE_URL = window.location.hostname === 'localhost' 
+    ? 'http://localhost:3001' // Desarrollo
+    : 'https://regisdom.onrender.com'; // Producción
+
+const API_BUSINESSES = `${BASE_URL}/api/businesses`;
+const API_URL = `${BASE_URL}/api/users`;
+
 document.addEventListener("DOMContentLoaded", () => {
     const user = JSON.parse(localStorage.getItem("user"));
 
@@ -7,9 +15,6 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
     }
 });
-
-const API_BUSINESSES = "/api/businesses";
-const API_URL = "/api/users";
 
 // Cargar negocios
 async function cargarNegocios() {
