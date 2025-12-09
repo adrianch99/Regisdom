@@ -40,7 +40,7 @@ router.post('/register', async (req, res) => {
         // Encriptar la contraseña
         const hashedPassword = await bcrypt.hash(password, saltRounds);
 
-        // Insertar el nuevo usuario
+        // Insertar el nuevo usuario (sin incluir la columna "id")
         const result = await pool.query(
             'INSERT INTO users (nombre, email, password, role) VALUES ($1, $2, $3, $4) RETURNING id',
             [nombre, email, hashedPassword, 'usuario']
