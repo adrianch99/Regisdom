@@ -1,3 +1,8 @@
+// Define la URL base dependiendo del entorno
+const BASE_URL = window.location.hostname === 'localhost' 
+    ? 'http://localhost:3001' // Desarrollo
+    : 'https://regisdom.onrender.com'; // Producción
+
 // ==== INICIO DE SESION ==== //
 // Solo agregar event listener si el formulario de login existe
 if (document.getElementById('login-form')) {
@@ -9,7 +14,7 @@ if (document.getElementById('login-form')) {
         const message = document.getElementById('login-message');
 
         try {
-            const response = await fetch('/api/auth/login', {
+            const response = await fetch(`${BASE_URL}/api/auth/login`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email, password })
