@@ -57,8 +57,14 @@ function mostrarDatosEnTabs(data) {
 async function actualizarEstadisticas(data) {
     const { clientes, prestamos } = data;
 
+    // Depuración: Verificar los datos de préstamos
+    console.log("Préstamos recibidos:", prestamos);
+
     // Contar préstamos activos (estado 'activo')
     const prestamosActivos = prestamos.filter(p => p.estado === 'activo').length;
+
+    // Depuración: Verificar el conteo de préstamos activos
+    console.log("Préstamos activos contados:", prestamosActivos);
 
     // Contar clientes registrados
     const totalClientes = clientes.length;
@@ -69,11 +75,14 @@ async function actualizarEstadisticas(data) {
         const cobradores = await res.json();
         const totalCobradores = cobradores.length;
 
+        // Actualizar estadísticas en el DOM
         document.getElementById("prestamos-activos").textContent = prestamosActivos;
         document.getElementById("clientes-registrados").textContent = totalClientes;
         document.getElementById("total-cobradores").textContent = totalCobradores;
     } catch (err) {
         console.error("Error cargando cobradores:", err);
+
+        // Actualizar estadísticas en el DOM con valores predeterminados
         document.getElementById("prestamos-activos").textContent = prestamosActivos;
         document.getElementById("clientes-registrados").textContent = totalClientes;
         document.getElementById("total-cobradores").textContent = "0";
