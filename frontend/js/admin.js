@@ -86,7 +86,7 @@ async function cargarClientes() {
         const user = JSON.parse(localStorage.getItem("user"));
         if (!user) return;
 
-        // Primero obtener el negocio del administrador
+        // Obtener el negocio del administrador
         const negocioRes = await fetch(`${API_BUSINESS_DASHBOARD}?admin_id=${user.id}`);
         if (!negocioRes.ok) {
             throw new Error('Error al obtener datos del negocio');
@@ -95,7 +95,7 @@ async function cargarClientes() {
         const negocioData = await negocioRes.json();
         const negocioId = negocioData.negocio.id;
 
-        // Luego obtener los clientes de ese negocio
+        // Obtener los clientes del negocio
         const res = await fetch(`${API_CLIENTES}?negocio_id=${negocioId}`);
         if (!res.ok) {
             throw new Error('Error al cargar clientes');
@@ -133,15 +133,32 @@ async function cargarClientes() {
 
 // Cargar préstamos con subtabs
 async function cargarPrestamos() {
-    await cargarPrestamosPendientes();
-    await cargarPrestamosActivos();
-    await cargarTodosLosPrestamos();
+    const user = JSON.parse(localStorage.getItem("user"));
+    if (!user) return;
+
+    try {
+        // Obtener el negocio del administrador
+        const negocioRes = await fetch(`${API_BUSINESS_DASHBOARD}?admin_id=${user.id}`);
+        if (!negocioRes.ok) {
+            throw new Error('Error al obtener datos del negocio');
+        }
+
+        const negocioData = await negocioRes.json();
+        const negocioId = negocioData.negocio.id;
+
+        // Cargar préstamos pendientes, activos y todos los préstamos del negocio
+        await cargarPrestamosPendientes(negocioId);
+        await cargarPrestamosActivos(negocioId);
+        await cargarTodosLosPrestamos(negocioId);
+    } catch (err) {
+        console.error("Error cargando préstamos:", err);
+    }
 }
 
 // Cargar préstamos pendientes
-async function cargarPrestamosPendientes() {
+async function cargarPrestamosPendientes(negocioId) {
     try {
-        const res = await fetch(`${API_LOANS}?estado=pendiente`);
+        const res = await fetch(`${API_LOANS}?estado=pendiente&negocio_id=${negocioId}`);
         const prestamos = await res.json();
         const contenedor = document.getElementById("lista-prestamos-pendientes");
         contenedor.innerHTML = "";
@@ -289,8 +306,21 @@ function cambiarTab(tabName) {
 
 // Cargar cartulinas
 async function cargarCartulinas() {
+    const user = JSON.parse(localStorage.getItem("user"));
+    if (!user) return;
+
     try {
-        const res = await fetch(API_CARTULINAS);
+        // Obtener el negocio del administrador
+        const negocioRes = await fetch(`${API_BUSINESS_DASHBOARD}?admin_id=${user.id}`);
+        if (!negocioRes.ok) {
+            throw new Error('Error al obtener datos del negocio');
+        }
+
+        const negocioData = await negocioRes.json();
+        const negocioId = negocioData.negocio.id;
+
+        // Obtener las cartulinas del negocio
+        const res = await fetch(`${API_CARTULINAS}?negocio_id=${negocioId}`);
         const cartulinas = await res.json();
         const contenedor = document.getElementById("lista-cartulinas");
         contenedor.innerHTML = "";
@@ -300,7 +330,7 @@ async function cargarCartulinas() {
             return;
         }
 
-        for (const c of cartulinas) {
+        cartulinas.forEach(c => {
             const div = document.createElement("div");
             div.className = "cartulina";
             div.innerHTML = `
@@ -310,66 +340,12 @@ async function cargarCartulinas() {
                 <p><strong>Teléfono:</strong> ${c.telefono}</p>
                 <p><strong>Cobrador:</strong> ${c.cobrador_id}</p>
             `;
-
-            // Crear tabla para los cobros
-            const tabla = document.createElement("table");
-            tabla.border = "1";
-            tabla.style.width = "100%";
-            tabla.innerHTML = `
-                <thead>
-                    <tr>
-                        <th>Fecha</th>
-                        <th>Abono</th>
-                        <th>Resta</th>
-                    </tr>
-                </thead>
-                <tbody>
-                </tbody>
-            `;
-
-            // Cargar cobros desde la base de datos
-            try {
-                const cobrosRes = await fetch(`${API_CARTULINAS}/${c.id}/cobros`);
-                const cobros = await cobrosRes.json();
-
-                const tbody = tabla.querySelector("tbody");
-                cobros.forEach(cobro => {
-                    const fila = document.createElement("tr");
-                    fila.innerHTML = `
-                        <td contenteditable="true">${cobro.fecha}</td>
-                        <td contenteditable="true">${cobro.abono}</td>
-                        <td contenteditable="true">${cobro.resta}</td>
-                    `;
-                    tbody.appendChild(fila);
-                });
-
-                // Agregar una fila vacía para nuevos cobros
-                const nuevaFila = document.createElement("tr");
-                nuevaFila.innerHTML = `
-                    <td contenteditable="true"></td>
-                    <td contenteditable="true"></td>
-                    <td contenteditable="true"></td>
-                `;
-                tbody.appendChild(nuevaFila);
-
-                habilitarEdicionCartulina(tabla, c.id);
-
-            } catch (err) {
-                console.error("Error cargando cobros:", err);
-            }
-
-            // Botón para guardar cambios
-            const botonGuardar = document.createElement("button");
-            botonGuardar.innerText = "Guardar Cambios";
-            botonGuardar.className = "btn-guardar-cambios";
-            botonGuardar.addEventListener("click", () => guardarCambiosCartulina(c.id, tabla));
-
-            div.appendChild(tabla);
-            div.appendChild(botonGuardar);
             contenedor.appendChild(div);
-        }
+        });
     } catch (err) {
         console.error("Error cargando cartulinas:", err);
+        const contenedor = document.getElementById("lista-cartulinas");
+        contenedor.innerHTML = `<p class="error">Error al cargar cartulinas</p>`;
     }
 }
 
